@@ -1,0 +1,16 @@
+.NavBar {
+    min-height: 75px;
+    width: 100%;
+    background-color: #d8d8d8;
+    border-bottom: solid #77787a 4px;
+}
+
+.Flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.Heading {
+    font-size: 20px;
+    margin: 20px;
+}
