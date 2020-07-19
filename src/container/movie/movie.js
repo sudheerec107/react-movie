@@ -1,32 +1,73 @@
 import React, { Component } from 'react';
-import { fetchMovie } from '../../store/actions/movie.action';
+import { fetchMovie, movieSuccess } from '../../store/actions/movie.action';
 import { connect } from 'react-redux';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import classes from './movie.module.css';
+import StarRatingComponent from 'react-star-rating-component';
 
 class Movie extends Component {
     componentDidMount() {
-        this.props.fetchData(this.props.match.params.id);
+        if (!this.props.movies || this.props.movies.length === 0) {
+            this.props.fetchData(this.props.match.params.id);
+        } else {
+            const movie = this.props.movies.find(mv => mv._id === this.props.match.params.id);
+            if (!!movie) {
+                this.props.updateMovie(movie);
+            } else {
+                this.props.fetchData(this.props.match.params.id);
+            }
+        }
     }
+
     render() {
-        let movie = null;
-        console.log('this.props.movie  >', this.props.movie);
+        let movieEle = null;
         if (this.props.movie != null) {
-            movie = (
-            <div>
-                <div>tite:{this.props.movie.tite}</div>
-                <div>Rating{this.props.movie.rating}</div>
-                <div>description:{this.props.movie.description}</div>
-            </div>)
+            movieEle = (
+                <div className="movie">
+                    <div className={classes.FloatLeft}>
+                        <div className="title2">{this.props.movie.title}</div>
+                    </div>
+                    <div className={classes.FloatRight}>
+                        <div>
+                            <span className="float-left title1">{this.props.movie.title}</span>
+                            <span className="float-right">
+                                <StarRatingComponent
+                                    className="big-font"
+                                    name={''}
+                                    value={this.props.movie.rating}
+                                    starCount={5}
+                                    editing={false} />
+                            </span>
+                            <div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <br />
+                            <span className="float-left">{this.props.movie.year} | {this.props.movie.movieLength} | {this.props.movie.director}</span>
+                            <br />
+                            <span className="float-left">Cast: {this.props.movie.cast.join(', ')}</span>
+                            <br />
+                        </div>
+                        <div>
+                            <p className="movie-description">
+                                {this.props.movie.description}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            )
         }
 
         let spinner = null;
-        if(this.props.loading) {
+        if (this.props.loading) {
             spinner = (<Spinner />);
         }
         return (
             <div>
                 {spinner}
-                {movie}
+                {movieEle}
             </div>
         );
     }
@@ -34,6 +75,7 @@ class Movie extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        movies: state.movies.movies,
         movie: state.movie.movie,
         error: state.movie.error,
         loading: state.movie.loading
@@ -42,7 +84,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (id) => dispatch(fetchMovie(id))
+        fetchData: (id) => dispatch(fetchMovie(id)),
+        updateMovie: (data) => dispatch(movieSuccess(data))
     }
 }
 

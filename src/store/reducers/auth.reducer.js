@@ -8,7 +8,7 @@ export const updateObject = (oldObject, newObject) => {
 }
 
 const initialState = {
-    token: null,
+    token: localStorage.token,
     error: null,
     loading: false,
 }
@@ -34,7 +34,8 @@ const authFail = (state, action) => {
 const authLogout = (state, action) => {
     return updateObject(state, {
         token: null,
-        userId: null
+        error: null,
+        loading: false
     });
 };
 

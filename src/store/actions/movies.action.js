@@ -24,15 +24,26 @@ export const moviesFail = (error) => {
 export const fetchMovies = () => {
     return dispatch => {
         dispatch(moviesStart());
-        
         instanceAxios.get('/movies')
             .then(response => {
-                setTimeout(() => {
-                    dispatch(moviesSuccess(response.data))           
-                }, 2000);
+                dispatch(moviesSuccess(response.data))
             })
             .catch(err => {
-                dispatch(moviesFail(err.response.data));
+                dispatch(moviesFail(err));
+            })
+
+    };
+}
+
+export const searchMovies = (title) => {
+    return dispatch => {
+        dispatch(moviesStart());
+        instanceAxios.get('/movies/search?title='+title)
+            .then(response => {
+                dispatch(moviesSuccess(response.data))
+            })
+            .catch(err => {
+                dispatch(moviesFail(err));
             })
 
     };

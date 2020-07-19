@@ -24,12 +24,10 @@ export const movieFail = (error) => {
 export const fetchMovie = (id) => {
     return dispatch => {
         dispatch(movieStart());
-        
-        instanceAxios.get('/movies/'+id)
+
+        instanceAxios.get('/movies/' + id)
             .then(response => {
-                setTimeout(() => {
-                    dispatch(movieSuccess(response.data))           
-                }, 2000);
+                dispatch(movieSuccess(response.data))
             })
             .catch(err => {
                 dispatch(movieFail(err.response.data));

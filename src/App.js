@@ -17,14 +17,14 @@ class App extends Component {
   render() {
     let topNavBar = (<NavBar/>);
     if (!this.props.isAuthenticated) {
-      topNavBar = (<Redirect to="/auth"></Redirect>)
+     topNavBar = (<Redirect to="/auth"></Redirect>)
     }
     return (
       <div className="App">
         {topNavBar}
         <Switch>
           <Route path="/auth" component={Auth}></Route>
-          <Route path="/movies/:id" exact component={Movie}></Route>
+          <Route path="/movie/:id" exact component={Movie}></Route>
           <Route path="/movies" exact component={Movies}></Route>
           <Route path="/" exact component={Movies}></Route>
         </Switch>

@@ -1,6 +1,8 @@
 .flex-container {
     display: flex;
     flex-direction: row;
+    -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .movie-card {
@@ -8,5 +10,16 @@
     margin: 20px;
     padding: 20px;
     border: solid gray 2px;
+    cursor: pointer;
+}
+
+.movies-card {
+    margin: 20px 10px 0px 10px;
+    min-width: 200px;
+    height: 200px;
+    text-align: center;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+    padding: 10px;
     cursor: pointer;
 }

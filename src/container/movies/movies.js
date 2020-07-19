@@ -11,7 +11,7 @@ class Movies extends Component {
     }
 
     clickHandler = (id) => {
-        this.props.history.push('movies/' + id);
+        this.props.history.push('movie/' + id);
     }
 
     render() {
@@ -23,15 +23,19 @@ class Movies extends Component {
         const moviesElement = groups.map(movie => {
             return (
                 <div key={movie}>
-                    <label style={{fontSize: '20px'}}>{movie}</label>
-                    ({this.props.movieGroups[movie].length})
+                    <div>
+                    <br/>
+                        <label className="title">{movie} ( {this.props.movieGroups[movie].length} )</label>
+                        <br/>
+                        <br/>
+                    </div>
                     <hr/>
                     <div className="flex-container">
                         {
                             this.props.movieGroups[movie].map(movie => {
                                 return  (
-                                    <div key={movie._id} className="movie-card" onClick={() => this.clickHandler(movie._id)}>
-                                        {movie.title}
+                                    <div key={movie._id} className="movies-card" onClick={() => this.clickHandler(movie._id)}>
+                                        <span className="movie-title">{movie.title}</span>
                                     </div>
                                 )
                             })
@@ -58,10 +62,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapdispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: () => dispatch(fetchMovies())
     }
 }
 
-export default connect(mapStateToProps, mapdispatchToProps)(Movies);
+export default connect(mapStateToProps, mapDispatchToProps)(Movies);

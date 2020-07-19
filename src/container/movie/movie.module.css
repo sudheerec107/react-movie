@@ -1,0 +1,14 @@
+.FloatLeft {
+    display: inline;
+    float: left;
+    width: 500px;
+    min-height: 400px;
+    border: 1px solid #eee;
+    margin: 0 10px 0 10px;
+    box-shadow: 0 2px 3px #ccc;
+}
+.FloatRight {
+    display: inline;
+    width: 500px;
+    min-height: 200px;
+}

@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.movie-title {
+  padding-top: 40px;
+}
+
+.title {
+  font-size: 20px;
+  float: left;
+  padding-left: 20px;
+}
+
+.float-left {
+  float: left;
+  margin-left: 50px;
+}
+
+.movie {
+  margin-top: 50px;
+}
+
+
+.dv-star-rating-star {
+  font-size: 25px;
+}
+
+.movie-description {
+  text-align: left;
+  margin-left: 570px;
+}
+
+.title1 {
+  font-size: 20px;
+}
+
+.title2 {
+  font-size: 20px;
+  margin-top: 20px;
+}

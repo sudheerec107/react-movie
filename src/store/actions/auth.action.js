@@ -29,12 +29,12 @@ export const logout = () => {
 }
 
 export const auth = (email, password, passwordCheck, isSignUp) => {
-    
+
     return dispatch => {
         dispatch(authStart());
         const authData = {
             email: email,
-            password: password           
+            password: password
         };
         let url = 'http://localhost:5000/api/users/login';
         if (!isSignUp) {
@@ -44,10 +44,8 @@ export const auth = (email, password, passwordCheck, isSignUp) => {
         axios.post(url, authData)
             .then(response => {
                 localStorage.setItem('token', response.data.token);
-                setTimeout(() => {
-                    dispatch(authSuccess(response.data.token));
-                }, 5000)
-               
+                dispatch(authSuccess(response.data.token));
+
             })
             .catch(err => {
                 dispatch(authFail(err.response.data));
