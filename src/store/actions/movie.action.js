@@ -30,7 +30,7 @@ export const fetchMovie = (id) => {
                 dispatch(movieSuccess(response.data))
             })
             .catch(err => {
-                dispatch(movieFail(err.response.data));
+                dispatch(movieFail(err));
             })
 
     };

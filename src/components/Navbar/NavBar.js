@@ -12,7 +12,7 @@ class NavBar extends Component {
 
     clickHandler = () => {
         const text = this.inputElement.current.value;
-        if (text == '') {
+        if (text === '') {
             this.props.fetchAll();
         } else {
             this.props.search(text);
@@ -24,7 +24,7 @@ class NavBar extends Component {
             <div className={[classes.NavBar, classes.Flex].join(' ')}>
                 <div><span className={classes.Heading}>MOVIE</span></div>
                 <div className={classes.AlignInput}>
-                <span onClick={this.clickHandler} className={classes.Search}>🔎</span> <input type="text" ref={this.inputElement}/>
+                <span onClick={this.clickHandler} className={classes.Search} role="img">🔎</span> <input type="text" ref={this.inputElement}/>
                 </div>
             </div>
 
