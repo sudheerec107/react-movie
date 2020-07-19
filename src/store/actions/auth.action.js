@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import instanceAxios from '../../axios';
 
 export const authStart = () => {
     return {
@@ -36,12 +36,12 @@ export const auth = (email, password, passwordCheck, isSignUp) => {
             email: email,
             password: password
         };
-        let url = 'http://localhost:5000/api/users/login';
+        let url = '/users/login';
         if (!isSignUp) {
-            url = 'http://localhost:5000/api/users/register';
+            url = '/users/register';
             authData.passwordCheck = passwordCheck
         }
-        axios.post(url, authData)
+        instanceAxios.post(url, authData)
             .then(response => {
                 localStorage.setItem('token', response.data.token);
                 dispatch(authSuccess(response.data.token));
