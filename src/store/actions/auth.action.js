@@ -48,7 +48,7 @@ export const auth = (email, password, passwordCheck, isSignUp) => {
 
             })
             .catch(err => {
-                dispatch(authFail(err.response.data));
+                dispatch(authFail(err.response ? err.response.data: err));
             })
 
     };

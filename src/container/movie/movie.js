@@ -7,10 +7,16 @@ import StarRatingComponent from 'react-star-rating-component';
 
 class Movie extends Component {
     componentDidMount() {
-        if (!this.props.movies || this.props.movies.length === 0) {
+        if (!this.props.movies || Object.keys(this.props.movies).length === 0) {
             this.props.fetchData(this.props.match.params.id);
         } else {
-            const movie = this.props.movies.find(mv => mv._id === this.props.match.params.id);
+            let movie = null;
+            Object.keys(this.props.movies).forEach(gp => {
+                if (movie == null) {
+                    movie = this.props.movies[gp].find(mv => mv._id === this.props.match.params.id);
+                }
+            });
+           
             if (!!movie) {
                 this.props.updateMovie(movie);
             } else {
@@ -75,7 +81,7 @@ class Movie extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        movies: state.movies.movies,
+        movies: state.movies.movieGroups,
         movie: state.movie.movie,
         error: state.movie.error,
         loading: state.movie.loading
